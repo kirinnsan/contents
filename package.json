@@ -1,0 +1,36 @@
+{
+  "name": "weblog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "ejs": "^3.0.2",
+    "eslint": "^6.8.0",
+    "express": "^4.17.1",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.4.1",
+    "popper.js": "^1.16.1",
+    "require-dir": "^1.2.0"
+  },
+  "devDependencies": {
+    "del": "^5.1.0",
+    "gulp": "^4.0.2",
+    "gulp-uglify": "^3.0.2",
+    "gulp-sass": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-uglify-es": "^2.0.0"
+  },
+  "scripts": {
+    "gulp": "gulp",
+    "build-dev": "set NODE_ENV=development && gulp",
+    "build-prod": "set NODE_ENV=production && gulp",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT"
+}
