@@ -1,1 +1,4 @@
 /node_modules
+/log/access
+/log/application
+/log/system
