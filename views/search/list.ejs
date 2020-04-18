@@ -16,17 +16,34 @@
 
   <main role="main" class="container">
 
+    <div class="float-right">
+      <span class="badge badge-secondary"><%= count %>件</span>
+    </div>
+
     <form class="form-inline mt-5 mb-5" method="GET" action="/search">
       <input class="form-control" type="text" id="keyword" name="keyword" value="<%= keyword %>">
       <input class="btn btn-default ml-2" type="submit" value="検索">
     </form>
   </main>
 
+
   <div class="mt-5 mb-5">
     <% for(let item of list) { %>
     <%- include("./item.ejs", item) %>
     <% } %>
   </div>
+
+  <nav>
+    <ul class="pagination">
+      <% for(let i=1; i<= pagination.max;i++) { %>
+        <% if(pagination.current !== i) { %>
+        <li class="page-item"><a class="page-link" href="/search/?keyword=<%= keyword %>&page=<%= i %>"><%= i %></a></li>
+        <% } else { %>
+        <li class="page-item active"><span class="page-link disable"><%= i %></span></li>
+        <% } %>
+      <% } %>
+    </ul>
+  </nav>
 
   <%- include("../_share/javascripts.ejs") %>
 </body>
