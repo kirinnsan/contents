@@ -11,6 +11,9 @@ app.use("/public", express.static(__dirname + "/public/" +
 
 app.use(accessLogger());
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use("/", require("./routes/index.js"));
 app.use("/posts/", require("./routes/posts.js"));
 app.use("/search/", require("./routes/search.js"));
