@@ -1,7 +1,10 @@
+let { SESSION_SECRET } = require("./config/app.config").security;
 let accessLogger = require("./lib/log/accesslogger.js");
 let systemLogger = require("./lib/log/systemlogger.js");
 let express = require("express");
 let app = express();
+let cookieParser = require("cookie-parser");
+let session = require("express-session");
 
 app.set("view engine", "ejs");
 app.disable("x-powered-by");
@@ -10,6 +13,14 @@ app.use("/public", express.static(__dirname + "/public/" +
   (process.env.NODE_ENV === "development" ? "development" : "production")));
 
 app.use(accessLogger());
+
+app.use(cookieParser());
+app.use(session({
+  secret: SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
+  name: "sid"
+}));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

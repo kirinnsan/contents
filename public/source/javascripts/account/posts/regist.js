@@ -5,5 +5,7 @@ $(function () {
     $form.attr("method", $submit.data("method"));
     $form.attr("action", $submit.data("action"));
     $form.submit();
+    $submit.off().prop("disable", true);
+    $form.on("submit", false);
   });
 });
