@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>ログイン</title>
+
+  <%- include("../_share/stylesheets.ejs") %>
+</head>
+
+<body>
+
+  <%- include("../_share/navbar.ejs") %>
+
+  <main role="main" class="container">
+
+    <div class="border-bottom mt-5 mb-5">
+      <h1>ログイン</h1>
+    </div>
+
+    <div class="row justify-content-center">
+      <form method="POST" action="/account/login" class="col-sm-10">
+        <div class="form-group row">
+          <label for="username" class="col-sm-2 col-form-label">ユーザー名:</label>
+          <div class="col-sm-10">
+            <input type="text" id="username" name="username" class="form-control">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="password" class="col-sm-2 col-form-label">パスワード:</label>
+          <div class="col-sm-10">
+            <input type="password" id="password" name="password" class="form-control">
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-2"></div>
+          <div class="col-sm-10">
+            <input type="submit" class="btn btn-primary" value="ログイン">
+          </div>
+        </div>
+        <% if(message && message.length !== 0) { %>
+        <div class="alert alert-danger"><%= message %></div>
+        <% } %>
+      </form>
+    </div>
+  </main>
+
+  <%- include("../_share/javascripts.ejs") %>
+</body>
+
+</html>
