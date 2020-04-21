@@ -1,10 +1,10 @@
 let { CONNECTION_URL, OPTIONS, DATABASE } = require("../config/mongodb.config");
-let { authenticate } = require("../lib/security/account-control.js");
+let { authenticate, authorize } = require("../lib/security/account-control.js");
 let MongoClient = require("mongodb").MongoClient;
 let router = require("express").Router();
 let tokens = new require("csrf")();
 
-router.get("/", (req, res, next) => {
+router.get("/", authorize("readWrite"), (req, res, next) => {
   if (req.isAuthenticated()) {
     next();
   } else {
@@ -20,7 +20,7 @@ router.get("/login", (req, res) => {
 
 router.post("/login", authenticate());
 
-router.get("/posts/regist", (req, res) => {
+router.get("/posts/regist", authorize("readWrite"), (req, res) => {
   tokens.secret((error, secret) => {
     let token = tokens.create(secret);
     req.session._csrf = secret;
@@ -29,13 +29,13 @@ router.get("/posts/regist", (req, res) => {
   });
 });
 
-router.post("/posts/regist/input", (req, res) => {
+router.post("/posts/regist/input", authorize("readWrite"), (req, res) => {
   let original = createRegistData(req.body);
   res.render("./account/posts/regist-form.ejs", { original });
 
 });
 
-router.post("/posts/regist/confirm", (req, res) => {
+router.post("/posts/regist/confirm", authorize("readWrite"), (req, res) => {
   let original = createRegistData(req.body);
   let errors = validateRegistData(req.body);
   if (errors) {
@@ -45,7 +45,7 @@ router.post("/posts/regist/confirm", (req, res) => {
   res.render("./account/posts/regist-confirm.ejs", { original });
 });
 
-router.post("/posts/regist/execute", (req, res) => {
+router.post("/posts/regist/execute", authorize("readWrite"), (req, res) => {
   let secret = req.session._csrf;
   let token = req.cookies._csrf;
 
@@ -78,7 +78,7 @@ router.post("/posts/regist/execute", (req, res) => {
 
 });
 
-router.get("/posts/regist/complete", (req, res) => {
+router.get("/posts/regist/complete", authorize("readWrite"), (req, res) => {
   res.render("./account/posts/regist-complete.ejs");
 
 });
