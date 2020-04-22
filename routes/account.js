@@ -20,6 +20,11 @@ router.get("/login", (req, res) => {
 
 router.post("/login", authenticate());
 
+router.post("/logout", (req, res) => {
+  req.logout();
+  res.redirect("/account/login");
+});
+
 router.get("/posts/regist", authorize("readWrite"), (req, res) => {
   tokens.secret((error, secret) => {
     let token = tokens.create(secret);

@@ -11,4 +11,9 @@
       </li>
     </ul>
   </div>
+  <% if(locals.user) { %>
+  <form method="POST" action="/account/logout" class="form-inline my-2 my-lg-0">
+    <input type="submit" class="btn btn-secondary my-2 my-sm-0" value="ログアウト">
+  </form>
+  <% } %>
 </nav>
