@@ -16,7 +16,7 @@ router.get("/*", (req, res) => {
       throw error;
     }).finally(() => {
       client.close();
-    })
+    });
   });
 });
 

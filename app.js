@@ -29,11 +29,25 @@ app.use(flash());
 // 分割代入
 app.use(...accountcontrol.initialize());
 
-app.use("/", require("./routes/index.js"));
-app.use("/posts/", require("./routes/posts.js"));
-app.use("/search/", require("./routes/search.js"));
-app.use("/account/", require("./routes/account.js"));
-app.use("/api/posts", require("./api/post.js"));
+app.use("/api", (() => {
+  let router = express.Router();
+  router.use("/posts", require("./api/post.js"));
+  return router;
+
+})());
+
+app.use("/", (() => {
+  let router = express.Router();
+  router.use((req,res,next)=> {
+    res.setHeader("X-Frame-Options", "SAMEORIGIN");
+    next();
+  });
+  router.use("/posts/", require("./routes/posts.js"));
+  router.use("/search/", require("./routes/search.js"));
+  router.use("/account/", require("./routes/account.js"));
+  router.use("/", require("./routes/index.js"));
+  return router;
+})());
 
 app.use(systemLogger());
 
