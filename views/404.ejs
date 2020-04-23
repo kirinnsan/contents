@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>404: Not Found</title>
+
+    <%- include("./_share/stylesheets.ejs") %>
+  </head>
+
+  <body>
+
+    <%- include("./_share/navbar.ejs") %>
+
+    <main role="main" class="container">
+
+      <div class="border-bottom mt-5 mb-5">
+        <h1>404: Not Found</h1>
+      </div>
+      <h2>リクエスト</h2>
+      <table class="table table-bordered">
+        <colgroup>
+          <col style="width: 30%">
+          <col style="width: 70%">
+        </colgroup>
+        <tr>
+          <th>リクエスト</th>
+          <td>
+            <span><%= data.method %></span>
+            <span>&nbsp;</span>
+            <span><%= data.url %></span>
+            <span>&nbsp;</span>
+            <span><%= (data.protocal || "").toUpperCase() %>/<%= data.version%></span>
+          </td>
+        </tr>
+      </table>
+    </main>
+
+    <%- include("./_share/javascripts.ejs") %>
+  </body>
+</html>
