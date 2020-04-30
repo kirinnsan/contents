@@ -1,0 +1,1 @@
+$((function(){$("input[type='submit']").on("click",(function(){let t=$(this),i=t.parents("form");i.attr("method",t.data("method")),i.attr("action",t.data("action")),i.submit(),t.off().prop("disable",!0),i.on("submit",!1)}))}));
