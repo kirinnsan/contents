@@ -1,0 +1,18 @@
+version: "3"
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+      - "5858:5858"
+    tty: true
+    container_name: node-app
+  db:
+    image: mongo:3.6.18
+    ports:
+      - "27017:27017"
+    container_name: mongo-db
+    volumes:
+      - db:/data/db
+volumes:
+  db:
