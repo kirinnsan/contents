@@ -19,7 +19,7 @@ module.exports = {
       extension: ".log"
     },
     DateRollingFileAppender: {
-      type: "datefile",
+      type: "dateFile",
       filename: path.join(root, "./log/access/access.log"),
       pattern: "-yyyyMMdd",
       daysToKeep: 30
